@@ -1,0 +1,17 @@
+fig-format: svg
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    transition: none
+    backgroundTransition: none
+    width: 1600
+    height: 900
+    smaller: true
+    slide-number: true
+    toc: true
+    toc-depth: 1
+    toc-title: Plan
+    html-math-method: mathml
+    embed-resources: true
+    comments:
+      hypothesis: true
