@@ -1,0 +1,4 @@
+Study	Indice	Condition	Reference	AUC	AUC_min	AUC_max	Cutoff	Sen	Sen_min	Sen_max	Spe	Spe_min	Spe_max	PPV	PPV_min	PPV_max	NPV	NPV_min	NPV_max
+yang2023	P0,1 (cmH2O)	High effort	PTPm	0,94	0,91	0,98	2,2	1,00	0,80	1,00	0,86	0,81	0,90	0,35	0,28	0,42	1,00	0,98	1,00
+yang2023	∆Pocc (cmH2O)	High effort	PTPm	0,93	0,88	0,97	8,4	1,00	0,80	1,00	0,75	0,69	0,81	0,23	0,19	0,27	1,00	0,98	1,00
+yang2023	PMI (cmH2O)	High effort	PTPm	0,93	0,88	0,98	2,1	0,88	0,64	0,99	0,81	0,76	0,86	0,26	0,20	0,32	0,99	0,96	1,00

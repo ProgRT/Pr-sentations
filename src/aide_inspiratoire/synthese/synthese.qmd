@@ -1,0 +1,56 @@
+---
+title: synthèse
+---
+
+## Low efforts
+```{ojs}
+//| echo: false
+data = FileAttachment("synthese.csv").tsv({typed: true});
+Inputs.table(data.filter(d=>d.Condition == "Low effort"), {
+	columns: [
+		"Study",
+		"Indices",
+		"Tres",
+		"Reference",
+		"AUC",
+		"Sen",
+		"Spe",
+		"PPV",
+		"NPV"
+	],
+	sort: "AUC",
+	reverse: true
+})
+```
+
+## High efforts
+```{ojs}
+//| echo: false
+Inputs.table(data.filter(d=>d.Condition == "High effort"), {
+	columns: [
+		"Study",
+		"Indices",
+		"Tres",
+		"Reference",
+		"AUC",
+		"Sen",
+		"Spe",
+		"PPV",
+		"NPV"
+	],
+	sort: "AUC",
+	reverse: true
+})
+```
+
+```{ojs}
+Plot.plot({
+	marks: [
+	Plot.dot(data.filter(d=>d.Condition == "High effort"), {
+		y: "AUC",
+		x: "Indices"
+		})
+	]
+})
+```
+`{ojs} typeof(data[0].AUC)`
