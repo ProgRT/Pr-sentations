@@ -1,0 +1,341 @@
+---
+title: "Doser l'aide inspiratoire"
+subtitle: "Cibles et outils cliniques"
+author: 
+  - name: "Nicolas Blais St-Laurent<small>, inh.</small>"
+    email: nicolas.blais.st-laurent.chum@ssss.gouv.qc.ca
+date: "24 Octobre 2024"
+bibliography: bibliographie.bib
+format: revealjs
+metadata-files:
+  - _reveal.yml
+title-slide-attributes:
+  data-background-image: "./images/splash_ai-bleu.png"
+---
+
+# Discussion
+
+- Le dosage de l'AI est-il un enjeu important ?
+- Comment jugez-vous si l'AI est réglée adéquatement ?
+
+# Aide inspiratoire et dysfonction diaphragmatique
+
+## Évolution de l'épaisseur diaphragmatique
+
+![](images/goligher_evolution_epaisseur.png)
+
+Tiré de @goligher2015.
+
+## Évolution de l'épaisseur versus contractilité
+
+![](images/goligher_epaisseur_vs_contractilite_vs_temps.png)
+
+Tiré de @goligher2015.
+
+## Évolution de l'épaisseur versus contractilité
+
+![](images/goligher_variation_epaisseur_vs_contractilite.png)
+
+Tiré de @goligher2015.
+
+## AI versus variation d'épaisseur
+
+![](images/ai_vs_variation_epaisseur.png)
+
+Tiré de @goligher2015.
+
+##  Influence du mode ventilatoire
+
+![](images/goligher_early_evolution.png)
+
+Traduit de @goligher2015.
+
+# Approche traditionnelle 
+
+## Approche traditionnelle de l'AI {.smaller}
+
+::: {.columns}
+
+:::{.column width="50%"}
+> Le niveau [d'AI] ajusté pendant ce type de ventilation est réglé selon
+> le VC expiré par le patient et sa *f* [...]. La *Society of critical
+> care medicine* suggère l'atteinte d'au moins un des objectifs
+> suivants:
+>
+> 1. Un VC expiré entre 6 ml/kg et 10 ml/kg, selon les besoins du
+>    patient
+> 2. Un diminution de la *f* totale à un niveau acceptable (<20/min)
+> 3. La ventilation minute (V'min) désirée (5-15 L/min)
+
+@gagne2006
+:::
+
+:::{.column}
+![](images/gagne2006.jpg){height=700}
+:::
+:::
+
+::: {.notes}
+
+@pletsch-assuncao2018: Ve inchangé sur Ai 20 -> 2 cmH2O
+
+:::
+
+## Qu'est-ce qu'une assistance adéquate ? {.smaller}
+
+{{< include tbl/gold_standard.md >}}
+
+## À propos de la fréquence respiratoire
+
+**Défavorable**
+
+{{< include tbl/fr_dfavorable.md >}}
+
+**Favorable**
+
+{{< include tbl/fr_favorable.md >}}
+
+## @alberti1995
+
+![](images/alberti_fr.png){width=45%}
+![](images/alberti_vt.png){width=45%}
+![](images/alberti_wobf.png){width=38%}
+![](images/alberti_wobp100.png){width=38%}
+
+## Réponse au CO₂
+
+![](images/CO2_response.svg)
+
+# Indicateurs émergents
+
+- Indice P mus
+- Δ P occlusion
+- Indice de débit
+
+## Indice P mus
+
+![](images/rationnel_pmi.png)
+
+Adapté de @foti1997
+
+## Indice P mus
+
+```{R}
+#| layout-ncol: 2
+#| fig-width: 10
+#| fig-height: 10
+
+par(cex=2)
+servou::PMIgraph("data/IPM/1722323504189.txt")
+servou::PMIgraph("data/IPM/1722324206678.txt")
+```
+
+## Manoeuvres rejettées
+
+::: {layout-ncol=2}
+![Plateau trop court](images/PMI_rejetées-0.png){width=55% .lightbox
+group="plateaux-exclus"}
+
+![Fuite suspectée](images/PMI_rejetées-1.png){width=55% .lightbox
+group="plateaux-exclus"}
+
+![Effort inspiratoire](images/PMI_rejetées-2.png){width=55% .lightbox group="plateaux-exclus"}
+
+![Effort expiratoire](images/PMI_rejetées-3.png){width=55% .lightbox
+group="plateaux-exclus"}
+:::
+
+## <span style="font-weight: normal">Δ</span> P occlusion
+
+```{R}
+#| layout-ncol: 2
+#| fig-width: 10
+#| fig-height: 10
+par(cex=2)
+
+cmh <- "cm H₂O"
+labAI <- function (AI) {
+	paste("AI =", AI, cmh)
+}
+
+f <- "./data/POCC/1718176215664.txt"
+p <- servou::parse_settings(f)
+servou::pmusGraph(f, 2, x=9, main=labAI(p$Niv))
+
+f <- "./data/POCC/1718176813185.txt"
+p <- servou::parse_settings(f)
+servou::pmusGraph(f, 6, x=20.5, main=labAI(p$Niv))
+```
+
+## Rationnel physiologique 
+
+![](images/rationnel_pocc/rationnel_Paw.png){width=950}
+![](images/rationnel_pocc/rationnel_Pes.png){width=950}
+![](images/rationnel_pocc/rationnel_Pmus.png){width=950}
+![](images/rationnel_pocc/rationnel_EAdi.png){width=950}
+
+::: {.notes}
+ΔPocc ~ PTPmus; R²=0,85
+:::
+
+Adapté de @bertoni2019
+
+## Indice de débit
+
+```{R}
+#| layout-ncol: 2
+#| fig-width: 10
+#| fig-height: 10
+par(cex=2)
+
+fplot <- function(c) {
+	plot(
+	c$Du, c$DÉ,
+	type="l",
+	xaxs="i",
+	xlab="Temps (s)",
+	ylab="Débit (l/m)"
+	)
+}
+
+f2 <- "./data/ID/1718176075155.txt"
+d <- servou::load_servou_data(f2)
+c1<- servou::cycles(d)[[2]]
+fplot(c1)
+
+f1 <- "./data/ID/1652614813406.txt"
+d <- servou::load_servou_data(f1)
+c2 <- servou::cycles(d)[[8]]
+fplot(c2)
+
+```
+
+## Rationnel physiologique
+
+![](images/rationnel_indv.png){height=700}
+
+Adapté de @albani2021.
+
+## Indice de débit
+
+$$ D\acute{e}bit_{(l/m)} = a - b \cdot Temps_{(s)}^{\ Ind.\ d\acute{e}bit} $$
+
+```{R}
+#| layout-ncol: 2
+#| fig-width: 10
+#| fig-height: 10
+par(cex=2)
+
+servou::fitPlot(c1)
+servou::fitPlot(c2)
+```
+
+## Performance diagnostique {.smaller}
+
+::: {.panel-tabset}
+
+### Efforts faibles
+
+```{ojs}
+//| echo: false
+data = FileAttachment("synthese/synthese.tsv").tsv({typed: true});
+columns = [
+		"Étude",
+		"Indice",
+		"Référence",
+		"Seuil",
+		"ASC",
+		"Sen",
+		"VPN",
+		"Spe",
+		"VPP"
+	];
+titles = [
+		"Étude",
+		"Indice",
+		"Référence",
+		"Seuil",
+		"Aire sous courbe",
+		"Sensibilité",
+		"VPN",
+		"Specificité",
+		"VPP"
+	];
+
+Inputs.table(data.filter(d=>d.Condition == "Low effort"), {
+	columns: columns,
+	titles: titles,
+	sort: "ASC",
+	reverse: true,
+	rows: 30,
+	select: false
+})
+```
+
+### Efforts excessifs
+
+```{ojs}
+Inputs.table(data.filter(d=>d.Condition == "High effort"), {
+	columns: columns,
+	sort: "ASC",
+	reverse: true,
+	rows: 30
+})
+```
+:::
+
+# Cas cliniques
+
+## Cas n° 1
+
+```{R}
+servou::files_table("./data/cas_surassistance/")
+```
+
+
+## Cas n° 2
+
+```{R}
+fichiers <- c(
+	"./data/cas_paradoxal/1723206558161.txt",
+	"./data/cas_paradoxal/1723206472664.txt"
+)
+
+servou::display(fichiers[1])
+```
+
+## Cas n° 2
+
+```{R}
+servou::display(fichiers[2])
+```
+
+## Cas n° 2
+
+```{R}
+#| layout-ncol: 2
+#| fig-width: 9
+#| fig-height: 5
+
+par(cex=2, mar=c(4, 4, 0, 0))
+
+servou::PMIgraph(fichiers[1])
+servou::pmusGraph(fichiers[2])
+
+cs <- servou::cycles("./data/cas_paradoxal/1723206472664.txt")
+servou::fitPlot(cs[[2]])
+
+s <- servou::parse_settings(fichiers[1])
+cat(paste("Aide inspiratoire:",  s$Niv, "cmH₂O"))
+```
+
+
+::: {.notes}
+- Greffé pulm.
+- Réint. sur mauv. gest. sécr.
+:::
+
+## Références
+
+::: {#refs}
+:::

@@ -6,11 +6,12 @@ format:
     backgroundTransition: none
     width: 1600
     height: 900
-    smaller: true
+    smaller: false
     slide-number: true
     toc: true
     toc-depth: 1
     toc-title: Plan
+    fig-cap-location: top
     html-math-method: mathml
     embed-resources: true
     comments:
