@@ -18,7 +18,7 @@ title-slide-attributes:
 - Le dosage de l'AI est-il un enjeu important ?
 - Comment jugez-vous si l'AI est réglée adéquatement ?
 
-# Aide inspiratoire et dysfonction diaphragmatique
+# Aide inspiratoire et dysfonction diaphragmatique {visibility=uncounted}  
 
 ## Évolution de l'épaisseur diaphragmatique
 
@@ -50,7 +50,7 @@ Tiré de @goligher2015.
 
 Traduit de @goligher2015.
 
-# Approche traditionnelle 
+# Approche traditionnelle  {visibility=uncounted}
 
 ## Approche traditionnelle de l'AI {.smaller}
 
@@ -106,7 +106,7 @@ Traduit de @goligher2015.
 
 ![](images/CO2_response.svg)
 
-# Indicateurs émergents
+# Indicateurs émergents {visibility=uncounted}
 
 - Indice P mus
 - Δ P occlusion
@@ -284,14 +284,46 @@ Inputs.table(data.filter(d=>d.Condition == "High effort"), {
 ```
 :::
 
-# Cas cliniques
+# Cas cliniques {visibility=uncounted}
 
 ## Cas n° 1
 
 ```{R}
-servou::files_table("./data/cas_surassistance/")
+servou::display("./data/cas_surassistance/1723447237671.txt", notitle=TRUE)
+abline(h=0, lty=2, lwd=.5, col=gray(.6))
 ```
 
+## Cas n° 1
+
+```{R}
+#| layout-ncol: 2
+#| fig-width: 10
+#| fig-height: 7
+
+par(cex=2, mar=c(4, 3.9, 0, 0))
+servou::pmusGraph("./data/cas_surassistance/1723447341668.txt")
+servou::PMIgraph("./data/cas_surassistance/1723447361176.txt")
+```
+
+
+## Cas n° 1
+
+```{R}
+servou::display("./data/cas_surassistance/1723447510174.txt", notitle=TRUE)
+abline(h=0, lty=2, lwd=.5, col=gray(.6))
+```
+
+## Cas n° 1
+
+```{R}
+#| layout-ncol: 2
+#| fig-width: 10
+#| fig-height: 7
+
+par(cex=2, mar=c(4, 3.9, 0, 0))
+servou::pmusGraph("./data/cas_surassistance/1723447761169.txt")
+servou::PMIgraph("./data/cas_surassistance/1723447761169.txt")
+```
 
 ## Cas n° 2
 
@@ -301,13 +333,14 @@ fichiers <- c(
 	"./data/cas_paradoxal/1723206472664.txt"
 )
 
-servou::display(fichiers[1])
+servou::display(fichiers[1], notitle=TRUE)
 ```
+
 
 ## Cas n° 2
 
 ```{R}
-servou::display(fichiers[2])
+servou::display(fichiers[2], notitle=TRUE)
 ```
 
 ## Cas n° 2
@@ -335,7 +368,7 @@ cat(paste("Aide inspiratoire:",  s$Niv, "cmH₂O"))
 - Réint. sur mauv. gest. sécr.
 :::
 
-## Références
+## Références {visibility=uncounted}
 
 ::: {#refs}
 :::
