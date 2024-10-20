@@ -15,4 +15,4 @@ format:
     html-math-method: mathml
     embed-resources: true
     comments:
-      hypothesis: true
+      hypothesis: false

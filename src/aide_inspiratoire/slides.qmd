@@ -22,33 +22,43 @@ title-slide-attributes:
 
 ## Évolution de l'épaisseur diaphragmatique
 
-![](images/goligher_evolution_epaisseur.png)
+![](images/goligher_evolution_epaisseur_fr.png)
 
-Tiré de @goligher2015.
+::: {.aside}
+Adapté de @goligher2015.
+:::
 
 ## Évolution de l'épaisseur versus contractilité
 
 ![](images/goligher_epaisseur_vs_contractilite_vs_temps.png)
 
+::: {.aside}
 Tiré de @goligher2015.
+:::
 
 ## Évolution de l'épaisseur versus contractilité
 
 ![](images/goligher_variation_epaisseur_vs_contractilite.png)
 
+::: {.aside}
 Tiré de @goligher2015.
+:::
 
 ## AI versus variation d'épaisseur
 
 ![](images/ai_vs_variation_epaisseur.png)
 
+::: {.aside}
 Tiré de @goligher2015.
+:::
 
 ##  Influence du mode ventilatoire
 
 ![](images/goligher_early_evolution.png)
 
+::: {.aside}
 Traduit de @goligher2015.
+:::
 
 # Approche traditionnelle  {visibility=uncounted}
 
@@ -97,10 +107,15 @@ Traduit de @goligher2015.
 
 ## @alberti1995
 
-![](images/alberti_fr.png){width=45%}
-![](images/alberti_vt.png){width=45%}
-![](images/alberti_wobf.png){width=38%}
-![](images/alberti_wobp100.png){width=38%}
+::: {layout-ncol=2}
+![](images/alberti_fr.png){height=350 .lightbox group="alberti"}
+
+![](images/alberti_wobf.png){height=350 .lightbox group="alberti"}
+
+![](images/alberti_vt.png){height=350 .lightbox group="alberti"}
+
+![](images/alberti_wobp100.png){height=350 .lightbox group="alberti"}
+:::
 
 ## Réponse au CO₂
 
@@ -114,9 +129,15 @@ Traduit de @goligher2015.
 
 ## Indice P mus
 
-![](images/rationnel_pmi.png)
+::: {layout-ncol=1}
 
+![](images/rationnel_pmi.png){height=700 .lightbox}
+
+:::
+
+::: {.aside}
 Adapté de @foti1997
+:::
 
 ## Indice P mus
 
@@ -178,7 +199,9 @@ servou::pmusGraph(f, 6, x=20.5, main=labAI(p$Niv))
 ΔPocc ~ PTPmus; R²=0,85
 :::
 
+::: {.aside}
 Adapté de @bertoni2019
+:::
 
 ## Indice de débit
 
@@ -214,7 +237,9 @@ fplot(c2)
 
 ![](images/rationnel_indv.png){height=700}
 
+::: {.aside}
 Adapté de @albani2021.
+:::
 
 ## Indice de débit
 
@@ -234,12 +259,23 @@ servou::fitPlot(c2)
 
 ::: {.panel-tabset}
 
-### Efforts faibles
+### 🦥 Efforts faibles / Sur-assistance
 
 ```{ojs}
 //| echo: false
-data = FileAttachment("synthese/synthese.tsv").tsv({typed: true});
-columns = [
+
+interpCol = d3.interpolateHsl("red", "green")
+function colASC(x){
+	return interpCol((x-.5)/.5);
+}
+
+function fmtASC(x){
+	const c = colASC(x)
+	return html`<span>${x}</span> <span style="color:${c};">⬤</span>`;
+}
+
+function tablePerformance(dataset){
+	const columns = [
 		"Étude",
 		"Indice",
 		"Référence",
@@ -250,37 +286,49 @@ columns = [
 		"Spe",
 		"VPP"
 	];
-titles = [
-		"Étude",
-		"Indice",
-		"Référence",
-		"Seuil",
-		"Aire sous courbe",
-		"Sensibilité",
-		"VPN",
-		"Specificité",
-		"VPP"
-	];
 
-Inputs.table(data.filter(d=>d.Condition == "Low effort"), {
-	columns: columns,
-	titles: titles,
-	sort: "ASC",
-	reverse: true,
-	rows: 30,
-	select: false
-})
+	const header = {
+		Seuil: "🎯 Seuil",
+		Référence: "🍎🍊 Référence",
+		ASC: "📈 Aire sous courbe",
+		Sen: "Sensibilité",
+		Spe: "Spécificité",
+		VPP: "✅ VPP",
+		VPN: "❌ VPN"
+	};
+
+	const aligns = {
+		Seuil: "center",
+		ASC: "center",
+		Sen: "center",
+		Spe: "center",
+		Référence: "center"
+	};
+
+	return Inputs.table(dataset, {
+		columns: columns,
+		header: header,
+		align: aligns,
+		format: {
+			ASC: fmtASC
+		},
+		width: {
+			ASC: 250
+		},
+		sort: "Indice",
+		rows: 28,
+		select: false
+	})
+}
+
+data = FileAttachment("synthese/synthese.tsv").tsv({typed: true});
+tablePerformance(data.filter(d=>d.Condition == "Low effort"))
 ```
 
-### Efforts excessifs
+### 🦣 Efforts excessifs / Sous-assistance
 
 ```{ojs}
-Inputs.table(data.filter(d=>d.Condition == "High effort"), {
-	columns: columns,
-	sort: "ASC",
-	reverse: true,
-	rows: 30
-})
+tablePerformance(data.filter(d=>d.Condition == "High effort"))
 ```
 :::
 
