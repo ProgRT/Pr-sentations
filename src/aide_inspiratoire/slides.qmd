@@ -416,9 +416,40 @@ abline(h=0, lty=2, lwd=.5, col=gray(.6))
 par(cex=2, mar=c(4, 3.9, 0, 0))
 servou::pmusGraph("./data/cas_surassistance/1723447761169.txt")
 servou::PMIgraph("./data/cas_surassistance/1723447761169.txt")
+#cs <- servou::cycles("./data/cas_paradoxal/1723206472664.txt")
+#servou::fitPlot(cs[[2]])
 ```
 
 ## Cas n° 2
+
+```{R}
+fichiers <- c(
+"./data/2024_10_03/1727941164137.txt",
+"./data/2024_10_03/1727941217136.txt"
+)
+
+servou::display(fichiers[1], notitle=TRUE)
+```
+
+## Cas n° 2
+
+```{R}
+servou::display(fichiers[2], notitle=TRUE)
+```
+
+## Cas n° 2
+
+```{R}
+#| layout-ncol: 2
+#| fig-width: 10
+#| fig-height: 7
+
+par(cex=2, mar=c(4, 3.9, 0, 0))
+servou::pmusGraph(fichiers[2])
+servou::PMIgraph(fichiers[1])
+```
+
+## Cas n° 3
 
 ```{R}
 fichiers <- c(
@@ -430,13 +461,13 @@ servou::display(fichiers[1], notitle=TRUE)
 ```
 
 
-## Cas n° 2
+## Cas n° 3
 
 ```{R}
 servou::display(fichiers[2], notitle=TRUE)
 ```
 
-## Cas n° 2
+## Cas n° 3
 
 ```{R}
 #| layout-ncol: 2
