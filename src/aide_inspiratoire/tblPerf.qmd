@@ -1,6 +1,7 @@
 ---
 title: "Doser l'aide inspiratoire"
 subtitle: "Cibles et outils cliniques"
+footer: 🎉 Semaine de l'inhalothérapeute 🎉
 author: 
   - name: "Nicolas Blais St-Laurent<small>, inh.</small>"
     email: nicolas.blais.st-laurent.chum@ssss.gouv.qc.ca
@@ -30,6 +31,14 @@ function colASC(x){
 function fmtASC(x){
 	const c = colASC(x)
 	return html`<span>${x}</span> <span style="color:${c};">⬤</span>`;
+}
+
+function fmtInd(x){
+	var x = x.replace("0.1", "<sub>0.1</sub>");
+	var x = x.replace("mus", "<sub>mus</sub>");
+	var x = x.replace(" es", "<sub> es</sub>");
+	var x = x.replace("occ", "<sub>occ</sub>");
+	return html`${x}`;
 }
 
 function tablePerformance(dataset){
@@ -68,7 +77,8 @@ function tablePerformance(dataset){
 		header: header,
 		align: aligns,
 		format: {
-			ASC: fmtASC
+			ASC: fmtASC,
+			Indice: fmtInd
 		},
 		width: {
 			ASC: 250

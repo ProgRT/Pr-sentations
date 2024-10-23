@@ -60,6 +60,18 @@ Tiré de @goligher2015.
 Traduit de @goligher2015.
 :::
 
+## Impacts
+
+::: {layout-ncol=2}
+![Risque de libération](images/goligher_risque_liberation.svg){height=600 width=600 .lightbox group=outcomes}
+
+![Durée de ventilation](images/goligher_duree_de_ventilation.svg){height=600 width=600 .lightbox group=outcomes}
+:::
+
+::: {.aside}
+Traduit de @goligher2018.
+:::
+
 # Approche traditionnelle  {visibility=uncounted}
 
 ## Approche traditionnelle de l'AI {.smaller}
@@ -123,16 +135,35 @@ Traduit de @goligher2015.
 
 # Indicateurs émergents {visibility=uncounted}
 
-- Indice P mus
-- Δ P occlusion
-- Indice de débit
+- [P<sub>0.1</sub>](/#/p0.1)
+- [Indice P<sub>mus</sub>](/#/indice-p-mus)
+- [Δ P occlusion](/#/δ-p-occlusion)
+- [Indice de débit](/#/indice-de-débit)
+
+## P<sub>0.1</sub>
+
+::: {layout-ncol=3}
+![Dräger V500](images/p01/Drager_V500.png){height=250 .lightbox group="P01"}
+
+![Hamilton-C6](images/p01/Hamilton-C6.png){height=250 .lightbox group="P01"}
+
+![Hamilton G5](images/p01/Hamilton-G5.png){height=250 .lightbox group="P01"}
+
+![PB980](images/p01/PB980.png){height=250 .lightbox group="P01"}
+
+![Servo-U](images/p01/Servo-U.png){height=250 .lightbox group="P01"}
+
+[○ Normal</br> ● Obstructif]{style="font-size: 75%; line-height: 25%"}
+:::
+
+::: {.aside}
+Adapté de @katayama2023
+:::
 
 ## Indice P mus
 
 ::: {layout-ncol=1}
-
 ![](images/rationnel_pmi.png){height=700 .lightbox}
-
 :::
 
 ::: {.aside}
@@ -166,7 +197,7 @@ group="plateaux-exclus"}
 group="plateaux-exclus"}
 :::
 
-## <span style="font-weight: normal">Δ</span> P occlusion
+## [Δ]{style="font-weight: normal"} P occlusion
 
 ```{R}
 #| layout-ncol: 2
@@ -235,7 +266,7 @@ fplot(c2)
 
 ## Rationnel physiologique
 
-![](images/rationnel_indv.png){height=700}
+![](images/rationnel_indv.png){.lightbox height=700}
 
 ::: {.aside}
 Adapté de @albani2021.
@@ -274,6 +305,14 @@ function fmtASC(x){
 	return html`<span>${x}</span> <span style="color:${c};">⬤</span>`;
 }
 
+function fmtInd(x){
+	var x = x.replace("0.1", "<sub>0.1</sub>");
+	var x = x.replace("mus", "<sub>mus</sub>");
+	var x = x.replace(" es", "<sub> es</sub>");
+	var x = x.replace("occ", "<sub>occ</sub>");
+	return html`${x}`;
+}
+
 function tablePerformance(dataset){
 	const columns = [
 		"Étude",
@@ -310,7 +349,8 @@ function tablePerformance(dataset){
 		header: header,
 		align: aligns,
 		format: {
-			ASC: fmtASC
+			ASC: fmtASC,
+			Iidice: fmtInd
 		},
 		width: {
 			ASC: 250
