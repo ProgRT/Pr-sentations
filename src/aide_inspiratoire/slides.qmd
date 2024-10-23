@@ -237,9 +237,10 @@ Adapté de @bertoni2019
 ## Indice de débit
 
 ```{R}
-#| layout-ncol: 2
-#| fig-width: 10
-#| fig-height: 10
+#| layout-ncol: 3
+#| fig-width: 7.5
+#| fig-height: 7.5
+
 par(cex=2)
 
 fplot <- function(c) {
@@ -259,8 +260,11 @@ fplot(c1)
 
 f1 <- "./data/ID/1652614813406.txt"
 d <- servou::load_servou_data(f1)
-c2 <- servou::cycles(d)[[8]]
-fplot(c2)
+c <- servou::cycles(d)
+
+fplot(c1)
+fplot(c[[4]])
+fplot(c[[8]])
 
 ```
 
@@ -277,13 +281,14 @@ Adapté de @albani2021.
 $$ D\acute{e}bit_{(l/m)} = a - b \cdot Temps_{(s)}^{\ Ind.\ d\acute{e}bit} $$
 
 ```{R}
-#| layout-ncol: 2
-#| fig-width: 10
-#| fig-height: 10
+#| layout-ncol: 3
+#| fig-width: 7.5
+#| fig-height: 7.5
 par(cex=2)
 
 servou::fitPlot(c1)
-servou::fitPlot(c2)
+servou::fitPlot(c[[4]])
+servou::fitPlot(c[[8]])
 ```
 
 ## Performance diagnostique {.smaller}
