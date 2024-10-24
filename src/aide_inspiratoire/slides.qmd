@@ -5,6 +5,9 @@ author:
   - name: "Nicolas Blais St-Laurent<small>, inh.</small>"
     email: nicolas.blais.st-laurent.chum@ssss.gouv.qc.ca
 date: "24 Octobre 2024"
+toc: false
+toc-depth: 1
+toc-title: Plan
 bibliography: bibliographie.bib
 format: revealjs
 metadata-files:

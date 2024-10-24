@@ -8,9 +8,6 @@ format:
     height: 900
     smaller: false
     slide-number: true
-    toc: true
-    toc-depth: 1
-    toc-title: Plan
     fig-cap-location: top
     html-math-method: mathml
     embed-resources: true
