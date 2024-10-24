@@ -30,18 +30,10 @@ Adapté de @goligher2015.
 
 ## Évolution de l'épaisseur versus contractilité
 
-![](images/goligher_epaisseur_vs_contractilite_vs_temps.png)
+![](images/goligher_epaisseur_vs_contractilite_vs_temps.png){.lightbox height=800}
 
 ::: {.aside}
-Tiré de @goligher2015.
-:::
-
-## Évolution de l'épaisseur versus contractilité
-
-![](images/goligher_variation_epaisseur_vs_contractilite.png)
-
-::: {.aside}
-Tiré de @goligher2015.
+Traduit de @goligher2015.
 :::
 
 ## AI versus variation d'épaisseur
@@ -65,7 +57,7 @@ Traduit de @goligher2015.
 ::: {layout-ncol=2}
 ![Risque de libération](images/goligher_risque_liberation.svg){height=600 width=600 .lightbox group=outcomes}
 
-![Durée de ventilation](images/goligher_duree_de_ventilation.svg){height=600 width=600 .lightbox group=outcomes}
+![Durée de ventilation (jours)](images/goligher_duree_de_ventilation.svg){height=600 width=600 .lightbox group=outcomes}
 :::
 
 ::: {.aside}
