@@ -155,7 +155,7 @@ Adapté de @katayama2023
 ## Indice P mus
 
 ::: {layout-ncol=1}
-![](images/rationnel_pmi.png){height=700 .lightbox}
+![](images/pmi/rationnel-pmi_vect.svg){height=750 .lightbox}
 :::
 
 ::: {.aside}
