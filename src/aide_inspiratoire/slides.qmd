@@ -115,18 +115,14 @@ Traduit de @goligher2018.
 ## @alberti1995
 
 ::: {layout-ncol=2}
-![](images/alberti_fr.png){height=350 .lightbox group="alberti"}
+![](images/alberti_fr.png){style="height: 350px"}
 
-![](images/alberti_wobf.png){height=350 .lightbox group="alberti"}
+![](images/alberti_wobf.png){style="height: 350px"}
 
-![](images/alberti_vt.png){height=350 .lightbox group="alberti"}
+![](images/alberti_vt.png){style="height: 350px" .lightbox}
 
-![](images/alberti_wobp100.png){height=350 .lightbox group="alberti"}
+![](images/alberti_wobp100.png){style="height: 350px" .lightbox}
 :::
-
-## Réponse au CO₂
-
-![](images/CO2_response.svg)
 
 # Indicateurs émergents {visibility=uncounted}
 
@@ -135,7 +131,7 @@ Traduit de @goligher2018.
 - [Δ P occlusion](/#/δ-p-occlusion)
 - [Indice de débit](/#/indice-de-débit)
 
-## P<sub>0.1</sub>
+## P<sub>0.1</sub> {.p01}
 
 ::: {layout-ncol=3}
 ![Dräger V500](images/p01/Drager_V500.png){height=250 .lightbox group="P01"}
@@ -158,7 +154,7 @@ Adapté de @katayama2023
 ## Indice P mus
 
 ::: {layout-ncol=1}
-![](images/pmi/rationnel-pmi_vect.svg){height=750 .lightbox}
+![](images/pmi/rationnel-pmi_vect.svg){style="height: 800px" .lightbox}
 :::
 
 ::: {.aside}
@@ -286,91 +282,9 @@ servou::fitPlot(c[[4]])
 servou::fitPlot(c[[8]])
 ```
 
-## Performance diagnostique {.smaller}
+## Valeurs de référence {.smaller}
 
-::: {.panel-tabset}
-
-### 🦥 Efforts faibles / Sur-assistance
-
-```{ojs}
-//| echo: false
-
-interpCol = d3.interpolateHsl("red", "green")
-function colASC(x){
-	return interpCol((x-.5)/.5);
-}
-
-function fmtASC(x){
-	const c = colASC(x)
-	return html`<span>${x}</span> <span style="color:${c};">⬤</span>`;
-}
-
-function fmtInd(x){
-	var x = x.replace("0.1", "<sub>0.1</sub>");
-	var x = x.replace("mus", "<sub>mus</sub>");
-	var x = x.replace(" es", "<sub> es</sub>");
-	var x = x.replace("occ", "<sub>occ</sub>");
-	return html`${x}`;
-}
-
-function tablePerformance(dataset){
-	const columns = [
-		"Étude",
-		"Indice",
-		"Référence",
-		"Seuil",
-		"ASC",
-		"Sen",
-		"VPN",
-		"Spe",
-		"VPP"
-	];
-
-	const header = {
-		Seuil: "🎯 Seuil",
-		Référence: "🍎🍊 Référence",
-		ASC: "📈 Aire sous courbe",
-		Sen: "Sensibilité",
-		Spe: "Spécificité",
-		VPP: "✅ VPP",
-		VPN: "❌ VPN"
-	};
-
-	const aligns = {
-		Seuil: "center",
-		ASC: "center",
-		Sen: "center",
-		Spe: "center",
-		Référence: "center"
-	};
-
-	return Inputs.table(dataset, {
-		columns: columns,
-		header: header,
-		align: aligns,
-		format: {
-			ASC: fmtASC,
-			Iidice: fmtInd
-		},
-		width: {
-			ASC: 250
-		},
-		sort: "Indice",
-		rows: 28,
-		select: false
-	})
-}
-
-data = FileAttachment("synthese/synthese.tsv").tsv({typed: true});
-tablePerformance(data.filter(d=>d.Condition == "Low effort"))
-```
-
-### 🦣 Efforts excessifs / Sous-assistance
-
-```{ojs}
-tablePerformance(data.filter(d=>d.Condition == "High effort"))
-```
-:::
+{{< include tbl/tblCibles.md >}}
 
 # Cas cliniques {visibility=uncounted}
 
@@ -490,3 +404,96 @@ cat(paste("Aide inspiratoire:",  s$Niv, "cmH₂O"))
 
 ::: {#refs}
 :::
+
+# Annexe
+
+## Performance diagnostique {.smaller}
+
+::: {.panel-tabset}
+
+### 🦥 Efforts faibles / Sur-assistance
+
+```{ojs}
+//| echo: false
+
+interpCol = d3.interpolateHsl("red", "green")
+function colASC(x){
+	return interpCol((x-.5)/.5);
+}
+
+function fmtASC(x){
+	const c = colASC(x)
+	return html`<span>${x}</span> <span style="color:${c};">⬤</span>`;
+}
+
+function fmtInd(x){
+	var x = x.replace("0.1", "<sub>0.1</sub>");
+	var x = x.replace("mus", "<sub>mus</sub>");
+	var x = x.replace(" es", "<sub> es</sub>");
+	var x = x.replace("occ", "<sub>occ</sub>");
+	return html`${x}`;
+}
+
+function tablePerformance(dataset){
+	const columns = [
+		"Étude",
+		"Indice",
+		"Référence",
+		"Seuil",
+		"ASC",
+		"Sen",
+		"VPN",
+		"Spe",
+		"VPP"
+	];
+
+	const header = {
+		Seuil: "🎯 Seuil",
+		Référence: "🍎🍊 Référence",
+		ASC: "📈 Aire sous courbe",
+		Sen: "Sensibilité",
+		Spe: "Spécificité",
+		VPP: "✅ VPP",
+		VPN: "❌ VPN"
+	};
+
+	const aligns = {
+		Seuil: "center",
+		ASC: "center",
+		Sen: "center",
+		Spe: "center",
+		Référence: "center"
+	};
+
+	return Inputs.table(dataset, {
+		columns: columns,
+		header: header,
+		align: aligns,
+		select: false,
+		format: {
+			ASC: fmtASC,
+			Iidice: fmtInd
+		},
+		width: {
+			ASC: 250
+		},
+		sort: "Indice",
+		rows: 28,
+		select: false
+	})
+}
+
+data = FileAttachment("synthese/synthese.tsv").tsv({typed: true});
+tablePerformance(data.filter(d=>d.Condition == "Low effort"))
+```
+
+### 🦣 Efforts excessifs / Sous-assistance
+
+```{ojs}
+tablePerformance(data.filter(d=>d.Condition == "High effort"))
+```
+:::
+
+## Réponse au CO₂
+
+![](images/CO2_response.svg)
